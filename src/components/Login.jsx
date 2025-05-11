@@ -9,6 +9,7 @@ import { BASE_URL } from '../utils/constants';
 const Login = () => {
   const [emailId,setEmailId]=useState("simran@gmail.com");
   const [password,setPassword]=useState("Simran@12345");
+  const [err,setErr]=useState("");
   const dispatch=useDispatch()
   const navigate=useNavigate()
 
@@ -22,6 +23,7 @@ const handleLogin= async ()=>{
 
 }
   catch(err){
+    setErr(err.response.data);
     console.error(err)
   }
 
@@ -42,6 +44,7 @@ const handleLogin= async ()=>{
   <input type="text" value={password} className="input" placeholder="" onChange={(e)=>setPassword(e.target.value)} />
 </fieldset>
     </div>
+    <p className="text-red-500">{err}</p>
     <div className="card-actions justify-center py-4">
       <button className="btn btn-primary " onClick={handleLogin}>Login</button>
     </div>
